@@ -7,5 +7,17 @@
   "editor.codeActionsOnSave": {
     "source.fixAll.oxc": "explicit"
   },
-  "oxc.enable": true
+  "oxc.enable": true,
+  "files.associations": {
+    "bun.lock": "jsonc",
+    "wrangler.jsonc": "jsonc"
+  },
+  "json.schemas": [
+    {
+      "fileMatch": ["bun.lock", "wrangler.jsonc", "**/tsconfig*.json"],
+      "schema": {
+        "allowTrailingCommas": true
+      }
+    }
+  ]
 }
