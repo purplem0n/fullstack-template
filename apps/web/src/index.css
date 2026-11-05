@@ -1,0 +1,7 @@
+@import "tailwindcss";
+@import "@repo/tokens/theme.css";
+
+body {
+  @apply bg-background text-text antialiased;
+  font-family: ui-sans-serif, system-ui, sans-serif;
+}

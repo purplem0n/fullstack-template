@@ -1,0 +1,14 @@
+/* Tailwind v4 theme. Keep in sync with ./index.ts */
+@theme {
+  --color-background: #0b0b0f;
+  --color-surface: #16161d;
+  --color-border: #2a2a35;
+  --color-text: #f4f4f6;
+  --color-muted: #9a9aab;
+  --color-primary: #7c5cff;
+  --color-primary-text: #ffffff;
+  --color-danger: #ff5c7a;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+}

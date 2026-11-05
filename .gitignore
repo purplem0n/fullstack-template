@@ -1,0 +1,12 @@
+node_modules
+dist
+.turbo
+.wrangler
+.expo
+.dev.vars
+.env*
+!.env.example
+*.log
+.DS_Store
+ios
+android
