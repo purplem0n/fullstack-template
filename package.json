@@ -19,7 +19,8 @@
     "preview:web": "bun run --cwd apps/web preview",
     "fix": "bun fmt && bun lint --fix",
     "check:all": "bun lint --max-warnings=0 && bun fmt --check && bun run typecheck && bun run test && bun run build",
-    "deploy": "bun run --cwd apps/web deploy"
+    "deploy": "bun run --cwd apps/web deploy",
+    "postinstall": "bun run --cwd apps/web typegen"
   },
   "devDependencies": {
     "turbo": "^2.6.0",

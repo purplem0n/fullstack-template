@@ -10,7 +10,8 @@
     "deploy": "react-router build && wrangler d1 migrations apply DB --remote && wrangler deploy",
     "db:migrate:local": "wrangler d1 migrations apply DB --local",
     "cf-typegen": "wrangler types && react-router typegen",
-    "typecheck": "wrangler types >/dev/null && react-router typegen && bun check"
+    "typecheck": "wrangler types >/dev/null && react-router typegen && bun check",
+    "typegen": "react-router typegen"
   },
   "dependencies": {
     "@repo/api-client": "workspace:*",
