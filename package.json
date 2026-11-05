@@ -17,7 +17,11 @@
     "lint": "biome check .",
     "format": "biome check --write .",
     "db:migrate": "bun --cwd apps/api run db:migrate:local",
-    "tokens": "bun run --cwd packages/tokens build"
+    "tokens": "bun run --cwd packages/tokens build",
+    "dev:web:prod-api": "bun run --cwd apps/web dev:prod-api",
+    "dev:mobile:prod-api": "bun run --cwd apps/mobile dev:prod-api",
+    "preview:web": "turbo run build --filter=@repo/web && bun run --cwd apps/web preview",
+    "deploy:api": "bun run --cwd apps/api deploy"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.3.0",

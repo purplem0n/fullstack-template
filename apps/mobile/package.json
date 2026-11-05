@@ -50,7 +50,9 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "dev": "expo start",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "dev:prod-api": "bun --env-file=.env.production run start",
+    "start:clear": "expo start --clear"
   },
   "private": true
 }

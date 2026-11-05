@@ -34,3 +34,10 @@ Agent rules live in `AGENTS.md`. Agent skills live in `.agents/skills`.
 - Web uses shadcn/ui (`cd apps/web && bunx shadcn@latest add <name>`).
 - Mobile uses NativeWind + React Native Reusables (`cd apps/mobile && bunx @react-native-reusables/cli@latest add <name>`).
 - Both read one token source, `packages/tokens/src/index.ts`. Edit it, then run `bun run tokens` to regenerate the web and mobile CSS.
+
+## Running and API URLs
+
+- In VS Code, pick a config from the Run and Debug dropdown (Dev: all, Dev: api + web, Dev: api + mobile, Prod API: web/mobile, Prod: preview web build, Deploy: api). The same commands are under Terminal > Run Task.
+- Local dev needs no URL config. On a physical phone on the same Wi-Fi as your Mac, Expo Go loads the app from the Mac's LAN IP and the app calls the API on that same IP at port 8787 (the API listens on all interfaces).
+- Production URLs: set your Worker URL in `apps/web/.env.production` and `apps/mobile/.env.production`.
+- Phone on a different network (cellular, other Wi-Fi): you still need a tunnel, e.g. `cloudflared tunnel --url http://localhost:8787`, then put that URL in `apps/mobile/.env.development.local` as `EXPO_PUBLIC_API_URL`, and start Expo with `--tunnel`.

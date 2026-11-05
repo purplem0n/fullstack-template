@@ -16,6 +16,7 @@ Bun is the package manager and script runner. Turborepo orchestrates tasks.
 
 - `bun install`: install everything. Never use npm, yarn, or pnpm.
 - `bun run dev:web` / `bun run dev:mobile` / `bun run dev`: start the API with the chosen client(s).
+- `bun run dev:web:prod-api` / `bun run dev:mobile:prod-api`: run a client against the deployed API. `bun run preview:web` serves the production web build. VS Code run configs for all of these are in `.vscode/launch.json` and `.vscode/tasks.json`; keep them in sync when scripts change.
 - `bun run lint`, `bun run format`, `bun run typecheck`, `bun run test`, `bun run build`.
 - New Expo dependency: `cd apps/mobile && bunx expo install <pkg>`. Other packages: `bun add <pkg> --cwd <workspace>`.
 - New DB change: add `apps/api/migrations/000N_name.sql`, then `bun run db:migrate`.
@@ -25,6 +26,8 @@ Bun is the package manager and script runner. Turborepo orchestrates tasks.
 - New mobile component: `cd apps/mobile && bunx @react-native-reusables/cli@latest add <name>`. Check setup with `bunx @react-native-reusables/cli@latest doctor`.
 
 ## Rules
+
+- API URLs: local dev needs no config (web uses the page's host, mobile uses the Mac's LAN IP from Metro, both on port 8787). Production URLs live in `apps/web/.env.production` (`VITE_API_URL`) and `apps/mobile/.env.production` (`EXPO_PUBLIC_API_URL`). These are public and committed; secrets go only in ignored `.env*.local` files or Wrangler secrets.
 
 - Every API request/response shape lives in `packages/shared` as a Zod schema. Never redefine it in an app.
 - Add API routes by chaining on the Hono app in `apps/api/src/index.ts`, so `AppType` stays complete. Then add a hook in `packages/api-client`.
@@ -43,8 +46,8 @@ Check these before any deploy. If one is not done, do it (or ask the user for th
 1. Cloudflare login: `bunx wrangler login` (or `CLOUDFLARE_API_TOKEN` in CI).
 2. D1 database: if `apps/api/wrangler.jsonc` still has `database_id` `00000000-0000-0000-0000-000000000000`, run `cd apps/api && bunx wrangler d1 create fullstack-template-db` and paste the returned id into `database_id`. Then run `bun run --cwd apps/api cf-typegen`.
 3. Deploy the API: `bun run --cwd apps/api deploy` (applies remote migrations, then deploys). Note the Worker URL it prints.
-4. Web: build with `VITE_API_URL=<worker url>` and deploy `apps/web/dist`.
-5. EAS (mobile): if `apps/mobile/app.json` has no `expo.extra.eas.projectId`, run `cd apps/mobile && bunx eas-cli login && bunx eas-cli init` (adds the project id), then `bunx eas-cli build:configure` (creates `eas.json`). Set `EXPO_PUBLIC_API_URL=<worker url>` in `eas.json` build profiles, then `bunx eas-cli build`.
+4. Put the Worker URL in `apps/web/.env.production` and `apps/mobile/.env.production` (replace `YOUR-SUBDOMAIN`). Web: `bun run build`, then deploy `apps/web/dist`.
+5. EAS (mobile): if `apps/mobile/app.json` has no `expo.extra.eas.projectId`, run `cd apps/mobile && bunx eas-cli login && bunx eas-cli init` (adds the project id), then `bunx eas-cli build:configure` (creates `eas.json`). EAS reads `apps/mobile/.env.production`; then run `bunx eas-cli build`.
    Never commit secrets. Login steps need the user, so stop and ask them when one is required.
 
 ## Definition of done

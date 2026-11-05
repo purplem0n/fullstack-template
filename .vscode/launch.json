@@ -1,0 +1,90 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Dev: all (api + web + mobile)",
+      "type": "node-terminal",
+      "request": "launch",
+      "command": "bun run dev",
+      "cwd": "${workspaceFolder}"
+    },
+    {
+      "name": "Dev: api",
+      "type": "node-terminal",
+      "request": "launch",
+      "command": "bun run dev:api",
+      "cwd": "${workspaceFolder}"
+    },
+    {
+      "name": "Dev: api + web",
+      "type": "node-terminal",
+      "request": "launch",
+      "command": "bun run dev:web",
+      "cwd": "${workspaceFolder}"
+    },
+    {
+      "name": "Dev: api + mobile",
+      "type": "node-terminal",
+      "request": "launch",
+      "command": "bun run dev:mobile",
+      "cwd": "${workspaceFolder}"
+    },
+    {
+      "name": "Dev: web only",
+      "type": "node-terminal",
+      "request": "launch",
+      "command": "bun run --cwd apps/web dev",
+      "cwd": "${workspaceFolder}"
+    },
+    {
+      "name": "Dev: mobile only",
+      "type": "node-terminal",
+      "request": "launch",
+      "command": "bun run --cwd apps/mobile dev",
+      "cwd": "${workspaceFolder}"
+    },
+    {
+      "name": "Prod API: web",
+      "type": "node-terminal",
+      "request": "launch",
+      "command": "bun run dev:web:prod-api",
+      "cwd": "${workspaceFolder}"
+    },
+    {
+      "name": "Prod API: mobile",
+      "type": "node-terminal",
+      "request": "launch",
+      "command": "bun run dev:mobile:prod-api",
+      "cwd": "${workspaceFolder}"
+    },
+    {
+      "name": "Prod: preview web build",
+      "type": "node-terminal",
+      "request": "launch",
+      "command": "bun run preview:web",
+      "cwd": "${workspaceFolder}"
+    },
+    {
+      "name": "Deploy: api",
+      "type": "node-terminal",
+      "request": "launch",
+      "command": "bun run deploy:api",
+      "cwd": "${workspaceFolder}"
+    },
+    {
+      "name": "Debug: web in Chrome",
+      "type": "chrome",
+      "request": "launch",
+      "url": "http://localhost:5173",
+      "webRoot": "${workspaceFolder}/apps/web",
+      "preLaunchTask": "dev: web only"
+    }
+  ],
+  "compounds": [
+    {
+      "name": "Dev: api + web (debug in Chrome)",
+      "configurations": ["Dev: api", "Debug: web in Chrome"],
+      "stopAll": true
+    }
+  ]
+}

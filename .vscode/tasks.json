@@ -1,0 +1,98 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "dev: all (api + web + mobile)",
+      "type": "shell",
+      "command": "bun run dev",
+      "isBackground": true,
+      "problemMatcher": [],
+      "group": "build"
+    },
+    {
+      "label": "dev: api",
+      "type": "shell",
+      "command": "bun run dev:api",
+      "isBackground": true,
+      "problemMatcher": []
+    },
+    {
+      "label": "dev: web only",
+      "type": "shell",
+      "command": "bun run --cwd apps/web dev",
+      "isBackground": true,
+      "problemMatcher": {
+        "owner": "vite",
+        "pattern": { "regexp": "^x^" },
+        "background": { "activesBegin": ".", "beginsPattern": "VITE", "endsPattern": "Local:" }
+      }
+    },
+    {
+      "label": "dev: mobile only",
+      "type": "shell",
+      "command": "bun run --cwd apps/mobile dev",
+      "isBackground": true,
+      "problemMatcher": []
+    },
+    {
+      "label": "dev: api + web",
+      "type": "shell",
+      "command": "bun run dev:web",
+      "isBackground": true,
+      "problemMatcher": []
+    },
+    {
+      "label": "dev: api + mobile",
+      "type": "shell",
+      "command": "bun run dev:mobile",
+      "isBackground": true,
+      "problemMatcher": []
+    },
+    {
+      "label": "prod api: web",
+      "type": "shell",
+      "command": "bun run dev:web:prod-api",
+      "isBackground": true,
+      "problemMatcher": []
+    },
+    {
+      "label": "prod api: mobile",
+      "type": "shell",
+      "command": "bun run dev:mobile:prod-api",
+      "isBackground": true,
+      "problemMatcher": []
+    },
+    {
+      "label": "prod: preview web build",
+      "type": "shell",
+      "command": "bun run preview:web",
+      "isBackground": true,
+      "problemMatcher": []
+    },
+    {
+      "label": "deploy: api",
+      "type": "shell",
+      "command": "bun run deploy:api",
+      "problemMatcher": []
+    },
+    {
+      "label": "check: lint + typecheck + test + build",
+      "type": "shell",
+      "command": "bun run lint && bun run typecheck && bun run test && bun run build",
+      "problemMatcher": ["$tsc"],
+      "group": { "kind": "test", "isDefault": true }
+    },
+    {
+      "label": "db: migrate local",
+      "type": "shell",
+      "command": "bun run db:migrate",
+      "problemMatcher": []
+    },
+    {
+      "label": "tokens: regenerate",
+      "type": "shell",
+      "command": "bun run tokens",
+      "problemMatcher": []
+    }
+  ]
+}

@@ -4,8 +4,10 @@ dist
 .wrangler
 .expo
 .dev.vars
-.env*
-!.env.example
+# Public API URLs live in committed .env.development/.env.production.
+# Secrets and personal overrides go in .env*.local (ignored).
+.env
+.env*.local
 *.log
 .DS_Store
 ios
