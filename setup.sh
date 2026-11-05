@@ -72,6 +72,9 @@ edit("apps/web/index.html", (s) => s.replace(/<title>.*<\/title>/, `<title>${d}<
 edit("README.md", (s) => s.replace(/\n## Using this as a template[\s\S]*?(?=\n## |$)/, "\n"));
 '
 
+# Local secrets file for the API (gitignored).
+[ -f apps/api/.dev.vars ] || cp apps/api/.dev.vars.example apps/api/.dev.vars
+
 rm -f clone.sh setup.sh
 
 if [ -z "${SKIP_INSTALL:-}" ]; then

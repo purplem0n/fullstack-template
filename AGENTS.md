@@ -40,6 +40,13 @@ Bun is the package manager and script runner. Turborepo orchestrates tasks.
 - Design skills (taste-skill first, then web-design-guidelines and the Vercel/Expo skills in `.agents/skills`) set direction for new screens. Their palette, radius, and font choices go into the tokens, not into components.
 - Strict TypeScript. No `any`, no non-null assertions without a comment.
 
+## Secrets
+
+- Real secrets live only in the API. Local: `apps/api/.dev.vars` (gitignored, created from `.dev.vars.example`). Production: `cd apps/api && bunx wrangler secret put NAME`. Read as `c.env.NAME`, then run `bun run --cwd apps/api cf-typegen`.
+- When adding a secret, add a commented placeholder to `apps/api/.dev.vars.example` too. Never commit real values.
+- Anything prefixed `VITE_` or `EXPO_PUBLIC_` is bundled into the client and public. Only put public values there (`.env.development`/`.env.production`, overrides in `.env*.local`; EAS via `eas env:create`).
+- CI secrets (`CLOUDFLARE_API_TOKEN`, `EXPO_TOKEN`) go in GitHub repo secrets.
+
 ## First deploy (one-time setup)
 
 Check these before any deploy. If one is not done, do it (or ask the user for the value) first.
