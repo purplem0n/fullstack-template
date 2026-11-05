@@ -17,7 +17,8 @@ Bun is the package manager and script runner. Turborepo orchestrates tasks.
 - `bun install`: install everything. Never use npm, yarn, or pnpm.
 - `bun run dev:web` / `bun run dev:mobile` / `bun run dev`: start the API with the chosen client(s).
 - `bun run dev:web:prod-api` / `bun run dev:mobile:prod-api`: run a client against the deployed API. `bun run preview:web` serves the production web build. VS Code run configs for all of these are in `.vscode/launch.json` and `.vscode/tasks.json`; keep them in sync when scripts change.
-- `bun run lint` (`bun lint`, oxlint rules in `.oxlintrc.json`), `bun run format` (`bun fmt`, Prettier style in `.prettierrc.json`), `bun run format:check`, `bun run typecheck`, `bun run test`, `bun run build`.
+- `bun lint` (rules in `.oxlintrc.json`), `bun fmt` (Prettier style in `.prettierrc.json`), `bun run fix` (format + autofix), `bun run typecheck`, `bun run test`, `bun run build`, `bun run check:all` (everything CI runs).
+- Never add `lint`, `fmt`, or `check` scripts to any package.json: `bun lint`/`bun fmt`/`bun check` run a same-named script if one exists, which recurses forever.
 - New Expo dependency: `cd apps/mobile && bunx expo install <pkg>`. Other packages: `bun add <pkg> --cwd <workspace>`.
 - New DB change: add `apps/api/migrations/000N_name.sql`, then `bun run db:migrate`.
 - After changing `wrangler.jsonc` bindings: `bun run --cwd apps/api cf-typegen`.
@@ -52,7 +53,7 @@ Check these before any deploy. If one is not done, do it (or ask the user for th
 
 ## Definition of done
 
-`bun run lint && bun run format:check && bun run typecheck && bun run test && bun run build` pass from the root, and each new API route has a test in `apps/api/src`.
+`bun run check:all` passes from the root, and each new API route has a test in `apps/api/src`.
 
 ## Tooling
 

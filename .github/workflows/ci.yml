@@ -10,8 +10,8 @@ jobs:
       - uses: oven-sh/setup-bun@v2
       - run: bun install --frozen-lockfile
       - run: bun run --cwd apps/api cf-typegen
-      - run: bun run lint
-      - run: bun run format:check
+      - run: bun lint --max-warnings=0
+      - run: bun fmt --check
       - run: bun run typecheck
       - run: bun run test
       - run: bun run build

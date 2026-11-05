@@ -14,16 +14,14 @@
     "build": "turbo run build",
     "typecheck": "turbo run typecheck",
     "test": "turbo run test",
-    "lint": "bun lint --no-script --max-warnings=0",
-    "format": "bun fmt --no-script && bun lint --no-script --fix",
     "db:migrate": "bun --cwd apps/api run db:migrate:local",
     "tokens": "bun run --cwd packages/tokens build",
     "dev:web:prod-api": "bun run --cwd apps/web dev:prod-api",
     "dev:mobile:prod-api": "bun run --cwd apps/mobile dev:prod-api",
     "preview:web": "turbo run build --filter=@repo/web && bun run --cwd apps/web preview",
     "deploy:api": "bun run --cwd apps/api deploy",
-    "lint:fix": "bun lint --no-script --fix",
-    "format:check": "bun fmt --no-script --check"
+    "fix": "bun fmt && bun lint --fix",
+    "check:all": "bun lint --max-warnings=0 && bun fmt --check && bun run typecheck && bun run test && bun run build"
   },
   "devDependencies": {
     "turbo": "^2.6.0",
