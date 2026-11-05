@@ -57,4 +57,4 @@ Check these before any deploy. If one is not done, do it (or ask the user for th
 
 ## Tooling
 
-Bun is the whole toolchain: `bun lint` (linter), `bun fmt` (formatter), `bun check` (type checker, used by every `typecheck` script), `bun test`. Do not add ESLint, Prettier, Biome, or tsc-based scripts.
+Requires Bun canary (`bun upgrade --canary`): `bun lint`, `bun fmt`, and `bun check` are not in stable Bun yet. Bun is the whole toolchain: `bun lint` (linter), `bun fmt` (formatter), `bun check` (type checker, used by every `typecheck` script), `bun test`. Do not add ESLint, Prettier, Biome, or tsc-based scripts.

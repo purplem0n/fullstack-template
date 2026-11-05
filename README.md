@@ -5,6 +5,8 @@ It ships with two example features wired end to end: a hello world endpoint and 
 
 ## Quick start
 
+Needs Bun canary (`bun upgrade --canary`) for `bun lint`, `bun fmt`, and `bun check`.
+
 ```bash
 bun install
 bun run --cwd apps/api cf-typegen   # generate Cloudflare types

@@ -8,6 +8,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: oven-sh/setup-bun@v2
+        with:
+          # bun lint / bun fmt / bun check are only in canary builds for now.
+          bun-version: canary
       - run: bun install --frozen-lockfile
       - run: bun run --cwd apps/api cf-typegen
       - run: bun lint --max-warnings=0
