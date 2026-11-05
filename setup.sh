@@ -5,6 +5,7 @@
 #   DISPLAY_NAME  human name shown in the app, browser tab and home screen
 #   IOS_BUNDLE_ID reverse-DNS iOS bundle identifier, e.g. com.acme.myapp
 #   ANDROID_PACKAGE Android application id (defaults to IOS_BUNDLE_ID with dashes removed)
+#   WORKERS_SUBDOMAIN your account's workers.dev subdomain, e.g. purplemon (blank keeps a placeholder)
 #   SKIP_INSTALL=1 skip `bun install`;  SKIP_GIT=1 skip `git init` + first commit
 
 set -euo pipefail
@@ -28,6 +29,10 @@ PROJECT_NAME="$(slugify "$PROJECT_NAME")"
 ask DISPLAY_NAME "App display name" "$(titleize "$PROJECT_NAME")"
 ask IOS_BUNDLE_ID "iOS bundle identifier" "com.example.$(echo "$PROJECT_NAME" | tr -d '-')"
 ask ANDROID_PACKAGE "Android package name" "$(echo "$IOS_BUNDLE_ID" | tr -d '-')"
+ask WORKERS_SUBDOMAIN "Cloudflare workers.dev subdomain (e.g. purplemon for purplemon.workers.dev, blank to set later)" ""
+WORKERS_SUBDOMAIN="$(echo "$WORKERS_SUBDOMAIN" | sed -E 's#^https?://##; s#/.*$##; s#\.workers\.dev$##' | tr '[:upper:]' '[:lower:]')"
+if [ -n "$WORKERS_SUBDOMAIN" ] && ! [[ "$WORKERS_SUBDOMAIN" =~ ^[a-z0-9][a-z0-9-]*$ ]]; then echo "Error: invalid workers.dev subdomain '$WORKERS_SUBDOMAIN'."; exit 1; fi
+API_URL="https://$PROJECT_NAME-api.${WORKERS_SUBDOMAIN:-YOUR-SUBDOMAIN}.workers.dev"
 
 if ! [[ "$PROJECT_NAME" =~ ^[a-z][a-z0-9-]*$ ]]; then echo "Error: invalid project name '$PROJECT_NAME'."; exit 1; fi
 if ! [[ "$IOS_BUNDLE_ID" =~ ^[A-Za-z][A-Za-z0-9-]*(\.[A-Za-z0-9-]+)+$ ]]; then echo "Error: invalid iOS bundle id '$IOS_BUNDLE_ID'."; exit 1; fi
@@ -40,9 +45,10 @@ echo "  Project name:    $PROJECT_NAME"
 echo "  Display name:    $DISPLAY_NAME"
 echo "  iOS bundle id:   $IOS_BUNDLE_ID"
 echo "  Android package: $ANDROID_PACKAGE"
+echo "  Production API:  $API_URL"
 echo
 
-export PROJECT_NAME DISPLAY_NAME IOS_BUNDLE_ID ANDROID_PACKAGE
+export PROJECT_NAME DISPLAY_NAME IOS_BUNDLE_ID ANDROID_PACKAGE WORKERS_SUBDOMAIN
 bun --eval '
 const fs = require("node:fs");
 const { PROJECT_NAME: p, DISPLAY_NAME: d, IOS_BUNDLE_ID: ios, ANDROID_PACKAGE: android } = process.env;
@@ -55,7 +61,11 @@ json("apps/mobile/app.json", ({ expo }) => {
   expo.ios = { ...expo.ios, bundleIdentifier: ios };
   expo.android = { ...expo.android, package: android };
 });
-const swap = (s) => s.replaceAll("fullstack-template", p).replaceAll("Fullstack Template", d);
+const sub = process.env.WORKERS_SUBDOMAIN;
+const swap = (s) => {
+  s = s.replaceAll("fullstack-template", p).replaceAll("Fullstack Template", d);
+  return sub ? s.replaceAll("YOUR-SUBDOMAIN", sub) : s;
+};
 for (const f of ["apps/api/wrangler.jsonc", "apps/web/.env.production", "apps/mobile/.env.production",
   "AGENTS.md", "README.md", "apps/web/src/App.tsx", "apps/mobile/src/app/_layout.tsx"]) edit(f, swap);
 edit("apps/web/index.html", (s) => s.replace(/<title>.*<\/title>/, `<title>${d}</title>`));

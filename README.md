@@ -31,7 +31,7 @@ curl -fsSL https://raw.githubusercontent.com/purplem0n/fullstack-template/main/c
 # or with the folder name: ... | bash -s my-app
 ```
 
-It asks for the folder, project name, display name, iOS bundle id and Android package, then renames the packages, Worker, D1 database, Expo app (`app.json`) and page titles, runs `bun install`, and makes a first commit. There are no `android/` or `ios/` folders: Expo generates them from `app.json` (`bunx expo prebuild`, or EAS Build does it). Delete the counter/hello examples once you have your own features.
+It asks for the folder, project name, display name, iOS bundle id, Android package and your workers.dev subdomain, then renames the packages, Worker, D1 database, Expo app (`app.json`) and page titles, runs `bun install`, and makes a first commit. There are no `android/` or `ios/` folders: Expo generates them from `app.json` (`bunx expo prebuild`, or EAS Build does it). Delete the counter/hello examples once you have your own features.
 
 ## UI and design tokens
 
