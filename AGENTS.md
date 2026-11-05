@@ -7,6 +7,7 @@ Bun is the package manager and script runner. Turborepo orchestrates tasks.
 
 - `apps/api`: the Hono API as a library (no Worker of its own). SQL migrations in `apps/api/migrations`. Exports `AppType` for the typed client; tested with `app.request()`.
 - `apps/web`: the deployed Worker. React Router framework mode with SSR (routes in `app/routes.ts`, pages in `app/routes`, layout in `app/root.tsx`), entry `workers/app.ts` mounts `apps/api` under `/api` and sends everything else to React Router. Config in `apps/web/wrangler.jsonc` (D1 binding `DB`). Tailwind v4 + shadcn/ui (components in `app/components/ui`, `cn` in `app/lib/utils.ts`). Worker env in loaders via `context.get(cloudflare).env` (`app/lib/cloudflare.ts`). Theme comes from `@repo/tokens/theme.css`.
+- `apps/landing`: marketing site. Astro (static output, `src/pages`, layout in `src/layouts/Layout.astro`) + Tailwind v4, deployed as its own Worker with static assets (`apps/landing/wrangler.jsonc`). No shadcn: landing UI is custom-designed, built in `.astro` components (`src/components`). Add a React island (`@astrojs/react`) only when a section truly needs client JS. Brand colors/radius/fonts still come from `@repo/tokens/theme.css` (imported in `src/styles/global.css`); no hardcoded brand colors. Use the design skills for direction and Astro docs (https://docs.astro.build/llms.txt) for APIs.
 - `apps/mobile`: Expo + Expo Router (routes in `src/app`) + NativeWind (Tailwind 3) + React Native Reusables (components in `src/components/ui`). Theme comes from `global.css`; JS-side colors (icons, navigation) from `THEME` in `src/lib/theme.ts`. Read `apps/mobile/AGENTS.md` before touching Expo APIs.
 - `packages/shared`: Zod schemas and types shared by every app. No React, no platform code.
 - `packages/api-client`: `createApiClient` (Hono RPC) plus TanStack Query hooks used by web and mobile.
@@ -15,6 +16,7 @@ Bun is the package manager and script runner. Turborepo orchestrates tasks.
 ## Commands (run from the repo root)
 
 - `bun install`: install everything. Never use npm, yarn, or pnpm.
+- `bun run dev:landing` (Astro on :4321, not included in `bun run dev`), `bun run deploy:landing`, `bun run preview:landing`.
 - `bun run dev:web` (Worker with web + API on :5173) / `bun run dev:mobile` (Worker + Expo) / `bun run dev`.
 - `bun run dev:mobile:prod-api`: run mobile against the deployed Worker. `bun run deploy`: build, apply remote migrations, deploy the Worker. `bun run preview:web` serves the production web build. VS Code run configs for all of these are in `.vscode/launch.json` and `.vscode/tasks.json`; keep them in sync when scripts change.
 - `bun lint` (rules in `.oxlintrc.json`), `bun fmt` (Prettier style in `.prettierrc.json`), `bun run fix` (format + autofix), `bun run typecheck`, `bun run test`, `bun run build`, `bun run check:all` (everything CI runs).

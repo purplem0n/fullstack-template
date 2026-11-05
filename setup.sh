@@ -68,7 +68,8 @@ const swap = (s) => {
   return sub ? s.replaceAll("YOUR-SUBDOMAIN", sub) : s;
 };
 for (const f of ["apps/web/wrangler.jsonc", "apps/mobile/.env.production", "AGENTS.md", "README.md",
-  "apps/web/app/routes/home.tsx", "apps/mobile/src/app/_layout.tsx"]) edit(f, swap);
+  "apps/web/app/routes/home.tsx", "apps/landing/wrangler.jsonc",
+  "apps/landing/astro.config.mjs", "apps/landing/src/layouts/Layout.astro", "apps/landing/src/pages/index.astro", "apps/mobile/src/app/_layout.tsx"]) edit(f, swap);
 edit("README.md", (s) => s.replace(/\n## Using this as a template[\s\S]*?(?=\n## |$)/, "\n"));
 '
 

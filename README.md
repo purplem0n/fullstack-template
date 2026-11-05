@@ -11,7 +11,8 @@ Needs Bun canary (`bun upgrade --canary`) for `bun lint`, `bun fmt`, and `bun ch
 bun install
 bun run --cwd apps/web cf-typegen   # generate Cloudflare + route types
 bun run dev:web                     # Worker (SSR web + /api) on :5173
-bun run dev:mobile                  # Worker + Expo (press i / a, or scan the QR in Expo Go)
+bun run dev:mobile                  # Worker + Expo
+bun run dev:landing                 # Astro landing page on :4321 (press i / a, or scan the QR in Expo Go)
 ```
 
 The web dev script applies D1 migrations locally before it starts.
@@ -19,6 +20,7 @@ The web dev script applies D1 migrations locally before it starts.
 ## Deploy
 
 - Worker (web + API): `cd apps/web && bunx wrangler d1 create fullstack-template-db`, paste the id into `apps/web/wrangler.jsonc`, then `bun run deploy`.
+- Landing: `bun run deploy:landing` (static Astro site on its own Worker, `<name>-landing`).
 - Mobile: set `EXPO_PUBLIC_API_URL`, then `bunx eas-cli build` or build locally with `bunx expo run:ios|android`.
 
 ## Bun and Expo

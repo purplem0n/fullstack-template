@@ -1,0 +1,11 @@
+@import 'tailwindcss';
+/* Brand colors, radius and fonts come from @repo/tokens (same names as web/mobile).
+   Landing-only design (gradients, display type, spacing, motion) belongs here or in components,
+   built from these tokens. Don't hardcode brand colors. */
+@import '@repo/tokens/theme.css';
+
+@layer base {
+  body {
+    @apply bg-background text-foreground antialiased;
+  }
+}

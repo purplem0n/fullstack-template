@@ -199,12 +199,65 @@
         "watch: types apps/mobile",
         "watch: types packages/shared",
         "watch: types packages/api-client",
-        "watch: types packages/tokens"
+        "watch: types packages/tokens",
+        "watch: types apps/landing"
       ],
       "runOptions": {
         "runOn": "folderOpen"
       },
       "problemMatcher": []
+    },
+    {
+      "label": "dev: landing",
+      "type": "shell",
+      "command": "bun run dev:landing",
+      "isBackground": true,
+      "problemMatcher": []
+    },
+    {
+      "label": "prod: preview landing",
+      "type": "shell",
+      "command": "bun run preview:landing",
+      "isBackground": true,
+      "problemMatcher": []
+    },
+    {
+      "label": "deploy: landing",
+      "type": "shell",
+      "command": "bun run deploy:landing",
+      "isBackground": true,
+      "problemMatcher": []
+    },
+    {
+      "label": "watch: types apps/landing",
+      "type": "shell",
+      "command": "bunx astro check --watch",
+      "options": {
+        "cwd": "${workspaceFolder}/apps/landing"
+      },
+      "isBackground": true,
+      "problemMatcher": {
+        "owner": "astro",
+        "source": "astro",
+        "fileLocation": ["relative", "${workspaceFolder}/apps/landing"],
+        "pattern": {
+          "regexp": "^(.+?):(\\d+):(\\d+) - (error|warning) .*?: (.+)$",
+          "file": 1,
+          "line": 2,
+          "column": 3,
+          "severity": 4,
+          "message": 5
+        },
+        "background": {
+          "activatesForAllFiles": true,
+          "beginsPattern": "Checking",
+          "endsPattern": "Result"
+        }
+      },
+      "presentation": {
+        "reveal": "never",
+        "group": "watch"
+      }
     }
   ]
 }

@@ -37,6 +37,27 @@
       "cwd": "${workspaceFolder}"
     },
     {
+      "name": "Dev: landing",
+      "type": "node-terminal",
+      "request": "launch",
+      "command": "bun run dev:landing",
+      "cwd": "${workspaceFolder}"
+    },
+    {
+      "name": "Prod: preview landing",
+      "type": "node-terminal",
+      "request": "launch",
+      "command": "bun run preview:landing",
+      "cwd": "${workspaceFolder}"
+    },
+    {
+      "name": "Deploy: landing",
+      "type": "node-terminal",
+      "request": "launch",
+      "command": "bun run deploy:landing",
+      "cwd": "${workspaceFolder}"
+    },
+    {
       "name": "Prod API: mobile",
       "type": "node-terminal",
       "request": "launch",

@@ -9,3 +9,5 @@ apps/mobile/expo-env.d.ts
 build
 .react-router
 worker-configuration.d.ts
+.astro
+dist
