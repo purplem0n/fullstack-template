@@ -31,7 +31,12 @@ Bun is the package manager and script runner. Turborepo orchestrates tasks.
 - API URLs: web calls its own origin + `/api` (no config). Server-side loaders call the API in-process with `api.request(path, init, env)`, not over HTTP. Mobile in dev uses the Mac's LAN IP from Metro on port 5173 + `/api`; production is `apps/mobile/.env.production` (`EXPO_PUBLIC_API_URL`, Worker URL + `/api`). These are public and committed; secrets go only in ignored `.env*.local` files or Wrangler secrets.
 
 - Every API request/response shape lives in `packages/shared` as a Zod schema. Never redefine it in an app.
-- Add API routes (without the `/api` prefix) by chaining on the Hono app in `apps/api/src/index.ts`, so `AppType` stays complete. Then add a hook in `packages/api-client`.
+- API structure (Hono "larger applications" pattern). `apps/api/src/index.ts` only composes: middleware plus `.route('/feature', feature)` chained calls, so `AppType` stays complete. Never put feature logic there; the inline counter/hello routes are template examples only.
+  - `src/routes/<feature>.ts`: one `new Hono<Env>()` sub-app per feature with chained handlers (keep chaining for RPC types). Handlers stay thin: validate input (`@hono/zod-validator` with schemas from `packages/shared`), call a service, return `c.json(...)`.
+  - `src/services/<feature>.ts`: business logic as plain functions taking `db`/deps and typed input, returning data. No Hono `c` here, so they unit-test without HTTP.
+  - `src/db/` for queries/helpers, `src/middleware/` for auth etc., `src/types.ts` for the shared `Env` bindings type.
+  - Tests next to the code (`*.test.ts`): services directly, routes via `app.request()`.
+  - Then add a hook in `packages/api-client`.
 - Apps call the API only through `@repo/api-client`. No raw `fetch` to our API.
 - Design system: shadcn/ui on web, React Native Reusables on mobile. Both use the same token names (`bg-primary`, `text-muted-foreground`, `rounded-lg`, ...), so the same class names mean the same thing on both platforms.
 - Never hardcode colors, radii, or fonts in components (no hex, no `bg-[#...]`, no raw `hsl(...)`). Use token classes, or `THEME` on mobile when a prop needs a raw color.
