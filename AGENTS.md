@@ -31,6 +31,15 @@ Bun is the package manager and script runner. Turborepo orchestrates tasks.
 - For any new screen or visual change, follow the design skills in `.agents/skills` (taste-skill first for direction).
 - Strict TypeScript. No `any`, no non-null assertions without a comment.
 
+## First deploy (one-time setup)
+Check these before any deploy. If one is not done, do it (or ask the user for the value) first.
+1. Cloudflare login: `bunx wrangler login` (or `CLOUDFLARE_API_TOKEN` in CI).
+2. D1 database: if `apps/api/wrangler.jsonc` still has `database_id` `00000000-0000-0000-0000-000000000000`, run `cd apps/api && bunx wrangler d1 create fullstack-template-db` and paste the returned id into `database_id`. Then run `bun run --cwd apps/api cf-typegen`.
+3. Deploy the API: `bun run --cwd apps/api deploy` (applies remote migrations, then deploys). Note the Worker URL it prints.
+4. Web: build with `VITE_API_URL=<worker url>` and deploy `apps/web/dist`.
+5. EAS (mobile): if `apps/mobile/app.json` has no `expo.extra.eas.projectId`, run `cd apps/mobile && bunx eas-cli login && bunx eas-cli init` (adds the project id), then `bunx eas-cli build:configure` (creates `eas.json`). Set `EXPO_PUBLIC_API_URL=<worker url>` in `eas.json` build profiles, then `bunx eas-cli build`.
+Never commit secrets. Login steps need the user, so stop and ask them when one is required.
+
 ## Definition of done
 
 `bun run lint && bun run typecheck && bun run test && bun run build` pass from the root, and each new API route has a test in `apps/api/src`.
