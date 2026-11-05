@@ -84,7 +84,7 @@
     {
       "label": "check: lint + typecheck + test + build",
       "type": "shell",
-      "command": "bun run lint && bun run typecheck && bun run test && bun run build",
+      "command": "bun run lint && bun run format:check && bun run typecheck && bun run test && bun run build",
       "problemMatcher": ["$tsc"],
       "group": {
         "kind": "test",

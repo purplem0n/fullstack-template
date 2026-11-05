@@ -11,6 +11,7 @@ jobs:
       - run: bun install --frozen-lockfile
       - run: bun run --cwd apps/api cf-typegen
       - run: bun run lint
+      - run: bun run format:check
       - run: bun run typecheck
       - run: bun run test
       - run: bun run build

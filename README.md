@@ -11,6 +11,7 @@ bun run --cwd apps/api cf-typegen   # generate Cloudflare types
 bun run dev:web                     # API on :8787 + web on :5173
 bun run dev:mobile                  # API + Expo (press i / a, or scan the QR in Expo Go)
 ```
+
 The API dev script applies D1 migrations locally before it starts.
 
 ## Deploy

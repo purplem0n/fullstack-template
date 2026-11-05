@@ -1,7 +1,7 @@
 import type { D1Database } from '@cloudflare/workers-types';
 import type { Counter, HelloResponse } from '@repo/shared';
-import { Hono } from 'hono';
 import { cors } from 'hono/cors';
+import { Hono } from 'hono';
 
 type Env = { Bindings: { DB: D1Database } };
 

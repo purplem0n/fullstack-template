@@ -1,0 +1,42 @@
+{
+  "plugins": ["react", "typescript", "oxc", "unicorn", "import"],
+  "categories": {
+    "correctness": "error",
+    "suspicious": "warn"
+  },
+  "rules": {
+    "react/rules-of-hooks": "error",
+    "react/exhaustive-deps": "warn",
+    "react/only-export-components": [
+      "warn",
+      {
+        "allowConstantExport": true
+      }
+    ],
+    "react/react-in-jsx-scope": "off",
+    "import/no-unassigned-import": [
+      "warn",
+      {
+        "allow": ["**/*.css"]
+      }
+    ]
+  },
+  "overrides": [
+    {
+      "files": ["**/components/ui/**"],
+      "rules": {
+        "react/only-export-components": "off"
+      }
+    }
+  ],
+  "ignorePatterns": [
+    "**/node_modules/**",
+    "**/dist/**",
+    "**/.expo/**",
+    "**/.wrangler/**",
+    "**/worker-configuration.d.ts",
+    ".agents/**",
+    ".claude/**",
+    "apps/mobile/scripts/**"
+  ]
+}

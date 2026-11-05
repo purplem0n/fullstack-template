@@ -8,7 +8,7 @@
   },
   "scripts": {
     "build": "bun scripts/build.ts",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "bun check"
   },
   "devDependencies": {
     "@types/bun": "latest",

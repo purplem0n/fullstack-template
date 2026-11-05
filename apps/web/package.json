@@ -7,7 +7,7 @@
     "dev": "vite --host",
     "build": "tsc -b && vite build",
     "preview": "vite preview --host",
-    "typecheck": "tsc -b",
+    "typecheck": "bun check -b",
     "dev:prod-api": "vite --host --mode production"
   },
   "dependencies": {

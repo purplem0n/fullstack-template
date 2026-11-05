@@ -1,0 +1,8 @@
+bun.lock
+skills-lock.json
+.agents/
+.claude/
+**/worker-configuration.d.ts
+apps/mobile/global.css
+packages/tokens/src/theme.css
+apps/mobile/expo-env.d.ts

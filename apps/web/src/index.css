@@ -1,7 +1,7 @@
-@import "tailwindcss";
-@import "tw-animate-css";
+@import 'tailwindcss';
+@import 'tw-animate-css';
 /* Colors and radius come from @repo/tokens. Don't add color variables here. */
-@import "@repo/tokens/theme.css";
+@import '@repo/tokens/theme.css';
 
 @custom-variant dark (&:is(.dark *));
 
