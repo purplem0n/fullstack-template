@@ -16,7 +16,8 @@
     "test": "turbo run test",
     "lint": "biome check .",
     "format": "biome check --write .",
-    "db:migrate": "bun --cwd apps/api run db:migrate:local"
+    "db:migrate": "bun --cwd apps/api run db:migrate:local",
+    "tokens": "bun run --cwd packages/tokens build"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.3.0",

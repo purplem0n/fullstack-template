@@ -28,3 +28,9 @@ Bun installs and runs everything. Expo's Metro bundler still runs on Node under 
 Rename `fullstack-template` in `package.json`, `apps/api/wrangler.jsonc`, and `apps/mobile/app.json`, then delete the counter/hello examples once you have your own features.
 
 Agent rules live in `AGENTS.md`. Agent skills live in `.agents/skills`.
+
+## UI and design tokens
+
+- Web uses shadcn/ui (`cd apps/web && bunx shadcn@latest add <name>`).
+- Mobile uses NativeWind + React Native Reusables (`cd apps/mobile && bunx @react-native-reusables/cli@latest add <name>`).
+- Both read one token source, `packages/tokens/src/index.ts`. Edit it, then run `bun run tokens` to regenerate the web and mobile CSS.

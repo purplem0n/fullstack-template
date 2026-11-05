@@ -1,7 +1,15 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+/* Colors and radius come from @repo/tokens. Don't add color variables here. */
 @import "@repo/tokens/theme.css";
 
-body {
-  @apply bg-background text-text antialiased;
-  font-family: ui-sans-serif, system-ui, sans-serif;
+@custom-variant dark (&:is(.dark *));
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+  }
 }
