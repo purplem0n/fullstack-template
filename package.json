@@ -8,20 +8,18 @@
   ],
   "scripts": {
     "dev": "turbo run dev",
-    "dev:api": "turbo run dev --filter=@repo/api",
-    "dev:web": "turbo run dev --filter=@repo/api --filter=@repo/web",
-    "dev:mobile": "turbo run dev --filter=@repo/api --filter=@repo/mobile",
+    "dev:web": "bun run --cwd apps/web dev",
+    "dev:mobile": "turbo run dev --filter=@repo/web --filter=@repo/mobile",
     "build": "turbo run build",
     "typecheck": "turbo run typecheck",
     "test": "turbo run test",
-    "db:migrate": "bun --cwd apps/api run db:migrate:local",
+    "db:migrate": "bun run --cwd apps/web db:migrate:local",
     "tokens": "bun run --cwd packages/tokens build",
-    "dev:web:prod-api": "bun run --cwd apps/web dev:prod-api",
     "dev:mobile:prod-api": "bun run --cwd apps/mobile dev:prod-api",
-    "preview:web": "turbo run build --filter=@repo/web && bun run --cwd apps/web preview",
-    "deploy:api": "bun run --cwd apps/api deploy",
+    "preview:web": "bun run --cwd apps/web preview",
     "fix": "bun fmt && bun lint --fix",
-    "check:all": "bun lint --max-warnings=0 && bun fmt --check && bun run typecheck && bun run test && bun run build"
+    "check:all": "bun lint --max-warnings=0 && bun fmt --check && bun run typecheck && bun run test && bun run build",
+    "deploy": "bun run --cwd apps/web deploy"
   },
   "devDependencies": {
     "turbo": "^2.6.0",

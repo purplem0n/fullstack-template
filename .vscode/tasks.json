@@ -10,13 +10,6 @@
       "group": "build"
     },
     {
-      "label": "dev: api",
-      "type": "shell",
-      "command": "bun run dev:api",
-      "isBackground": true,
-      "problemMatcher": []
-    },
-    {
       "label": "dev: web only",
       "type": "shell",
       "command": "bun run --cwd apps/web dev",
@@ -55,13 +48,6 @@
       "problemMatcher": []
     },
     {
-      "label": "prod api: web",
-      "type": "shell",
-      "command": "bun run dev:web:prod-api",
-      "isBackground": true,
-      "problemMatcher": []
-    },
-    {
       "label": "prod api: mobile",
       "type": "shell",
       "command": "bun run dev:mobile:prod-api",
@@ -76,9 +62,9 @@
       "problemMatcher": []
     },
     {
-      "label": "deploy: api",
+      "label": "deploy",
       "type": "shell",
-      "command": "bun run deploy:api",
+      "command": "bun run deploy",
       "problemMatcher": []
     },
     {

@@ -2,15 +2,28 @@ import { useCounter, useCounterAction, useHello } from '@repo/api-client';
 import { Minus, Plus, RotateCcw } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { api } from './api';
+import api from '@repo/api';
+import type { Route } from './+types/home';
+import { api as client } from '@/lib/api';
+import { cloudflare } from '@/lib/cloudflare';
+
+export function meta(): Route.MetaDescriptors {
+  return [{ title: 'Fullstack Template' }];
+}
+
+// Server-side: call the API in-process (no HTTP hop) and render the result into the HTML.
+export async function loader({ context }: Route.LoaderArgs) {
+  const res = await api.request('/hello', {}, context.get(cloudflare).env);
+  return { serverHello: (await res.json()) as { message: string } };
+}
 
 function HelloCard() {
-  const hello = useHello(api);
+  const hello = useHello(client);
   return (
     <Card className="w-full">
       <CardHeader>
         <CardTitle>Hello world</CardTitle>
-        <CardDescription>GET /hello from the Workers API</CardDescription>
+        <CardDescription>GET /api/hello from the browser</CardDescription>
       </CardHeader>
       <CardContent>
         {hello.isPending && <p className="text-muted-foreground">Loading…</p>}
@@ -27,8 +40,8 @@ function HelloCard() {
 }
 
 function CounterCard() {
-  const counter = useCounter(api);
-  const action = useCounterAction(api);
+  const counter = useCounter(client);
+  const action = useCounterAction(client);
   return (
     <Card className="w-full">
       <CardHeader>
@@ -68,10 +81,11 @@ function CounterCard() {
   );
 }
 
-export default function App() {
+export default function Home({ loaderData }: Route.ComponentProps) {
   return (
     <main className="mx-auto flex min-h-screen max-w-md flex-col items-center justify-center gap-6 p-6">
       <h1 className="text-3xl font-bold">Fullstack Template</h1>
+      <p className="text-sm text-muted-foreground">SSR: {loaderData.serverHello.message}</p>
       <HelloCard />
       <CounterCard />
     </main>

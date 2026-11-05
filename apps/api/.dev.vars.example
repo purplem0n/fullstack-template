@@ -1,8 +1,0 @@
-# Local secrets for `wrangler dev`. Copy to .dev.vars (setup.sh and `bun run dev:api` do this for you).
-# .dev.vars is gitignored. Never commit real values.
-#
-# Production: cd apps/api && bunx wrangler secret put <NAME>
-# Read in code as c.env.<NAME>; run `bun run --cwd apps/api cf-typegen` after adding one.
-# Non-secret config goes in "vars" in wrangler.jsonc instead.
-
-# EXAMPLE_API_KEY=replace-me

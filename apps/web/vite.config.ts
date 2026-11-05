@@ -1,10 +1,12 @@
-import path from 'node:path';
+import { cloudflare } from '@cloudflare/vite-plugin';
+import { reactRouter } from '@react-router/dev/vite';
 import tailwindcss from '@tailwindcss/vite';
-import react from '@vitejs/plugin-react';
 import { defineConfig } from 'vite';
 
 export default defineConfig({
-  plugins: [react(), tailwindcss()],
-  resolve: { alias: { '@': path.resolve(import.meta.dirname, './src') } },
-  server: { port: 5173 },
+  plugins: [cloudflare({ viteEnvironment: { name: 'ssr' } }), tailwindcss(), reactRouter()],
+  resolve: { tsconfigPaths: true },
+  // host: reachable from phones on the same Wi-Fi (mobile calls /api here in dev).
+  server: { host: true, port: 5173 },
+  preview: { host: true },
 });

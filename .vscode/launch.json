@@ -9,28 +9,21 @@
       "cwd": "${workspaceFolder}"
     },
     {
-      "name": "Dev: api",
-      "type": "node-terminal",
-      "request": "launch",
-      "command": "bun run dev:api",
-      "cwd": "${workspaceFolder}"
-    },
-    {
-      "name": "Dev: api + web",
+      "name": "Dev: web + api",
       "type": "node-terminal",
       "request": "launch",
       "command": "bun run dev:web",
       "cwd": "${workspaceFolder}"
     },
     {
-      "name": "Dev: api + mobile",
+      "name": "Dev: mobile + api",
       "type": "node-terminal",
       "request": "launch",
       "command": "bun run dev:mobile",
       "cwd": "${workspaceFolder}"
     },
     {
-      "name": "Dev: web only",
+      "name": "Dev: web + api (SSR)",
       "type": "node-terminal",
       "request": "launch",
       "command": "bun run --cwd apps/web dev",
@@ -41,13 +34,6 @@
       "type": "node-terminal",
       "request": "launch",
       "command": "bun run --cwd apps/mobile dev",
-      "cwd": "${workspaceFolder}"
-    },
-    {
-      "name": "Prod API: web",
-      "type": "node-terminal",
-      "request": "launch",
-      "command": "bun run dev:web:prod-api",
       "cwd": "${workspaceFolder}"
     },
     {
@@ -65,10 +51,10 @@
       "cwd": "${workspaceFolder}"
     },
     {
-      "name": "Deploy: api",
+      "name": "Deploy",
       "type": "node-terminal",
       "request": "launch",
-      "command": "bun run deploy:api",
+      "command": "bun run deploy",
       "cwd": "${workspaceFolder}"
     },
     {
@@ -83,7 +69,7 @@
   "compounds": [
     {
       "name": "Dev: api + web (debug in Chrome)",
-      "configurations": ["Dev: api", "Debug: web in Chrome"],
+      "configurations": ["Debug: web in Chrome"],
       "stopAll": true
     }
   ]

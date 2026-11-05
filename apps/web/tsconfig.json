@@ -1,16 +1,27 @@
 {
-  "files": [],
-  "references": [
-    {
-      "path": "./tsconfig.app.json"
-    },
-    {
-      "path": "./tsconfig.node.json"
-    }
+  "include": [
+    "app/**/*",
+    "workers/**/*",
+    ".react-router/types/**/*",
+    "worker-configuration.d.ts",
+    "vite.config.ts",
+    "react-router.config.ts"
   ],
   "compilerOptions": {
-    "paths": {
-      "@/*": ["./src/*"]
-    }
+    "target": "es2023",
+    "lib": ["ES2023", "DOM", "DOM.Iterable"],
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "types": ["vite/client", "node"],
+    "jsx": "react-jsx",
+    "rootDirs": [".", "./.react-router/types"],
+    "paths": { "@/*": ["./app/*"] },
+    "strict": true,
+    "skipLibCheck": true,
+    "noEmit": true,
+    "verbatimModuleSyntax": true,
+    "isolatedModules": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true
   }
 }

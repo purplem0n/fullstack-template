@@ -1,0 +1,5 @@
+# Local secrets for the Worker (web + API). Copied to .dev.vars by setup.sh and `bun run dev:web`.
+# .dev.vars is gitignored. Production: `cd apps/web && bunx wrangler secret put NAME`.
+# Example:
+# MY_SECRET=change-me
+# Read in API code as c.env.<NAME>; run `bun run --cwd apps/web cf-typegen` after adding one.

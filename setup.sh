@@ -66,14 +66,13 @@ const swap = (s) => {
   s = s.replaceAll("fullstack-template", p).replaceAll("Fullstack Template", d);
   return sub ? s.replaceAll("YOUR-SUBDOMAIN", sub) : s;
 };
-for (const f of ["apps/api/wrangler.jsonc", "apps/web/.env.production", "apps/mobile/.env.production",
-  "AGENTS.md", "README.md", "apps/web/src/App.tsx", "apps/mobile/src/app/_layout.tsx"]) edit(f, swap);
-edit("apps/web/index.html", (s) => s.replace(/<title>.*<\/title>/, `<title>${d}</title>`));
+for (const f of ["apps/web/wrangler.jsonc", "apps/mobile/.env.production", "AGENTS.md", "README.md",
+  "apps/web/app/routes/home.tsx", "apps/mobile/src/app/_layout.tsx"]) edit(f, swap);
 edit("README.md", (s) => s.replace(/\n## Using this as a template[\s\S]*?(?=\n## |$)/, "\n"));
 '
 
-# Local secrets file for the API (gitignored).
-[ -f apps/api/.dev.vars ] || cp apps/api/.dev.vars.example apps/api/.dev.vars
+# Local secrets file for the Worker (gitignored).
+[ -f apps/web/.dev.vars ] || cp apps/web/.dev.vars.example apps/web/.dev.vars
 
 rm -f clone.sh setup.sh
 
