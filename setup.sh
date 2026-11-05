@@ -15,7 +15,8 @@ ask() {
   local __var=$1 __q=$2 __def=${3:-} __ans=""
   if [ -n "${!__var:-}" ]; then return; fi
   if [ -r /dev/tty ]; then
-    read -r -p "$__q${__def:+ [$__def]}: " __ans 2>/dev/null </dev/tty || true
+    # Prompt goes to the terminal directly (read -p writes to stderr, which may be hidden).
+    { printf '%s' "$__q${__def:+ [$__def]}: " >/dev/tty; read -r __ans </dev/tty; } 2>/dev/null || true
   fi
   printf -v "$__var" '%s' "${__ans:-$__def}"
 }
@@ -32,7 +33,7 @@ ask ANDROID_PACKAGE "Android package name" "$(echo "$IOS_BUNDLE_ID" | tr -d '-')
 ask WORKERS_SUBDOMAIN "Cloudflare workers.dev subdomain (e.g. purplemon for purplemon.workers.dev, blank to set later)" ""
 WORKERS_SUBDOMAIN="$(echo "$WORKERS_SUBDOMAIN" | sed -E 's#^https?://##; s#/.*$##; s#\.workers\.dev$##' | tr '[:upper:]' '[:lower:]')"
 if [ -n "$WORKERS_SUBDOMAIN" ] && ! [[ "$WORKERS_SUBDOMAIN" =~ ^[a-z0-9][a-z0-9-]*$ ]]; then echo "Error: invalid workers.dev subdomain '$WORKERS_SUBDOMAIN'."; exit 1; fi
-API_URL="https://$PROJECT_NAME-api.${WORKERS_SUBDOMAIN:-YOUR-SUBDOMAIN}.workers.dev"
+API_URL="https://$PROJECT_NAME.${WORKERS_SUBDOMAIN:-YOUR-SUBDOMAIN}.workers.dev"
 
 if ! [[ "$PROJECT_NAME" =~ ^[a-z][a-z0-9-]*$ ]]; then echo "Error: invalid project name '$PROJECT_NAME'."; exit 1; fi
 if ! [[ "$IOS_BUNDLE_ID" =~ ^[A-Za-z][A-Za-z0-9-]*(\.[A-Za-z0-9-]+)+$ ]]; then echo "Error: invalid iOS bundle id '$IOS_BUNDLE_ID'."; exit 1; fi
@@ -45,7 +46,7 @@ echo "  Project name:    $PROJECT_NAME"
 echo "  Display name:    $DISPLAY_NAME"
 echo "  iOS bundle id:   $IOS_BUNDLE_ID"
 echo "  Android package: $ANDROID_PACKAGE"
-echo "  Production API:  $API_URL"
+echo "  Production URL:  $API_URL (API at /api)"
 echo
 
 export PROJECT_NAME DISPLAY_NAME IOS_BUNDLE_ID ANDROID_PACKAGE WORKERS_SUBDOMAIN

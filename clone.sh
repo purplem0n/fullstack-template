@@ -15,7 +15,8 @@ ask() { # ask VAR "Question" "default"
   local __var=$1 __q=$2 __def=${3:-} __ans=""
   if [ -n "${!__var:-}" ]; then return; fi
   if [ -r /dev/tty ]; then
-    read -r -p "$__q${__def:+ [$__def]}: " __ans 2>/dev/null </dev/tty || true
+    # Prompt goes to the terminal directly (read -p writes to stderr, which may be hidden).
+    { printf '%s' "$__q${__def:+ [$__def]}: " >/dev/tty; read -r __ans </dev/tty; } 2>/dev/null || true
   fi
   printf -v "$__var" '%s' "${__ans:-$__def}"
 }
