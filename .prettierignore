@@ -6,3 +6,6 @@ skills-lock.json
 apps/mobile/global.css
 packages/tokens/src/theme.css
 apps/mobile/expo-env.d.ts
+build
+.react-router
+worker-configuration.d.ts
