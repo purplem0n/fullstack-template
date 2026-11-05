@@ -85,9 +85,7 @@
       "label": "check: lint + typecheck + test + build",
       "type": "shell",
       "command": "bun run check:all",
-      "problemMatcher": [
-        "$tsc"
-      ],
+      "problemMatcher": ["$tsc"],
       "group": {
         "kind": "test",
         "isDefault": true
@@ -115,10 +113,7 @@
       "isBackground": true,
       "problemMatcher": {
         "base": "$tsc-watch",
-        "fileLocation": [
-          "relative",
-          "${workspaceFolder}/apps/api"
-        ]
+        "fileLocation": ["relative", "${workspaceFolder}/apps/api"]
       },
       "presentation": {
         "reveal": "never",
@@ -135,10 +130,7 @@
       "isBackground": true,
       "problemMatcher": {
         "base": "$tsc-watch",
-        "fileLocation": [
-          "relative",
-          "${workspaceFolder}/apps/web"
-        ]
+        "fileLocation": ["relative", "${workspaceFolder}/apps/web"]
       },
       "presentation": {
         "reveal": "never",
@@ -155,10 +147,7 @@
       "isBackground": true,
       "problemMatcher": {
         "base": "$tsc-watch",
-        "fileLocation": [
-          "relative",
-          "${workspaceFolder}/apps/mobile"
-        ]
+        "fileLocation": ["relative", "${workspaceFolder}/apps/mobile"]
       },
       "presentation": {
         "reveal": "never",
@@ -175,10 +164,7 @@
       "isBackground": true,
       "problemMatcher": {
         "base": "$tsc-watch",
-        "fileLocation": [
-          "relative",
-          "${workspaceFolder}/packages/shared"
-        ]
+        "fileLocation": ["relative", "${workspaceFolder}/packages/shared"]
       },
       "presentation": {
         "reveal": "never",
@@ -195,10 +181,7 @@
       "isBackground": true,
       "problemMatcher": {
         "base": "$tsc-watch",
-        "fileLocation": [
-          "relative",
-          "${workspaceFolder}/packages/api-client"
-        ]
+        "fileLocation": ["relative", "${workspaceFolder}/packages/api-client"]
       },
       "presentation": {
         "reveal": "never",
@@ -215,10 +198,7 @@
       "isBackground": true,
       "problemMatcher": {
         "base": "$tsc-watch",
-        "fileLocation": [
-          "relative",
-          "${workspaceFolder}/packages/tokens"
-        ]
+        "fileLocation": ["relative", "${workspaceFolder}/packages/tokens"]
       },
       "presentation": {
         "reveal": "never",
