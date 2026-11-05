@@ -26,9 +26,12 @@ Bun installs and runs everything. Expo's Metro bundler still runs on Node under 
 
 ## Using this as a template
 
-Rename `fullstack-template` in `package.json`, `apps/api/wrangler.jsonc`, and `apps/mobile/app.json`, then delete the counter/hello examples once you have your own features.
+```bash
+curl -fsSL https://raw.githubusercontent.com/purplem0n/fullstack-template/main/clone.sh | bash
+# or with the folder name: ... | bash -s my-app
+```
 
-Agent rules live in `AGENTS.md`. Agent skills live in `.agents/skills`.
+It asks for the folder, project name, display name, iOS bundle id and Android package, then renames the packages, Worker, D1 database, Expo app (`app.json`) and page titles, runs `bun install`, and makes a first commit. There are no `android/` or `ios/` folders: Expo generates them from `app.json` (`bunx expo prebuild`, or EAS Build does it). Delete the counter/hello examples once you have your own features.
 
 ## UI and design tokens
 
