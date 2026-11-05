@@ -1,4 +1,5 @@
 {
+  "json.schemaDownload.enable": true,
   "task.allowAutomaticTasks": "on",
   "typescript.tsserver.experimental.enableProjectDiagnostics": true,
   "editor.defaultFormatter": "biomejs.biome",

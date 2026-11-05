@@ -15,9 +15,26 @@
       "!**/worker-configuration.d.ts",
       "!**/.agents",
       "!**/.claude",
-      "!apps/mobile/scripts"
+      "!apps/mobile/scripts",
+      "!!bun.lock"
     ]
   },
+  "overrides": [
+    {
+      "includes": ["**/bun.lock"],
+      "json": {
+        "parser": {
+          "allowTrailingCommas": true
+        }
+      },
+      "linter": {
+        "enabled": false
+      },
+      "formatter": {
+        "enabled": false
+      }
+    }
+  ],
   "formatter": {
     "indentStyle": "space",
     "indentWidth": 2,
