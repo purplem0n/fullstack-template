@@ -23,8 +23,14 @@
       "isBackground": true,
       "problemMatcher": {
         "owner": "vite",
-        "pattern": { "regexp": "^x^" },
-        "background": { "activesBegin": ".", "beginsPattern": "VITE", "endsPattern": "Local:" }
+        "pattern": {
+          "regexp": "^x^"
+        },
+        "background": {
+          "activesBegin": ".",
+          "beginsPattern": "VITE",
+          "endsPattern": "Local:"
+        }
       }
     },
     {
@@ -80,7 +86,10 @@
       "type": "shell",
       "command": "bun run lint && bun run typecheck && bun run test && bun run build",
       "problemMatcher": ["$tsc"],
-      "group": { "kind": "test", "isDefault": true }
+      "group": {
+        "kind": "test",
+        "isDefault": true
+      }
     },
     {
       "label": "db: migrate local",
@@ -92,6 +101,123 @@
       "label": "tokens: regenerate",
       "type": "shell",
       "command": "bun run tokens",
+      "problemMatcher": []
+    },
+    {
+      "label": "watch: types apps/api",
+      "type": "shell",
+      "command": "bunx tsc --noEmit --watch --preserveWatchOutput",
+      "options": {
+        "cwd": "${workspaceFolder}/apps/api"
+      },
+      "isBackground": true,
+      "problemMatcher": {
+        "base": "$tsc-watch",
+        "fileLocation": ["relative", "${workspaceFolder}/apps/api"]
+      },
+      "presentation": {
+        "reveal": "never",
+        "group": "watch"
+      }
+    },
+    {
+      "label": "watch: types apps/web",
+      "type": "shell",
+      "command": "bunx tsc -b --watch --preserveWatchOutput",
+      "options": {
+        "cwd": "${workspaceFolder}/apps/web"
+      },
+      "isBackground": true,
+      "problemMatcher": {
+        "base": "$tsc-watch",
+        "fileLocation": ["relative", "${workspaceFolder}/apps/web"]
+      },
+      "presentation": {
+        "reveal": "never",
+        "group": "watch"
+      }
+    },
+    {
+      "label": "watch: types apps/mobile",
+      "type": "shell",
+      "command": "bunx tsc --noEmit --watch --preserveWatchOutput",
+      "options": {
+        "cwd": "${workspaceFolder}/apps/mobile"
+      },
+      "isBackground": true,
+      "problemMatcher": {
+        "base": "$tsc-watch",
+        "fileLocation": ["relative", "${workspaceFolder}/apps/mobile"]
+      },
+      "presentation": {
+        "reveal": "never",
+        "group": "watch"
+      }
+    },
+    {
+      "label": "watch: types packages/shared",
+      "type": "shell",
+      "command": "bunx tsc --noEmit --watch --preserveWatchOutput",
+      "options": {
+        "cwd": "${workspaceFolder}/packages/shared"
+      },
+      "isBackground": true,
+      "problemMatcher": {
+        "base": "$tsc-watch",
+        "fileLocation": ["relative", "${workspaceFolder}/packages/shared"]
+      },
+      "presentation": {
+        "reveal": "never",
+        "group": "watch"
+      }
+    },
+    {
+      "label": "watch: types packages/api-client",
+      "type": "shell",
+      "command": "bunx tsc --noEmit --watch --preserveWatchOutput",
+      "options": {
+        "cwd": "${workspaceFolder}/packages/api-client"
+      },
+      "isBackground": true,
+      "problemMatcher": {
+        "base": "$tsc-watch",
+        "fileLocation": ["relative", "${workspaceFolder}/packages/api-client"]
+      },
+      "presentation": {
+        "reveal": "never",
+        "group": "watch"
+      }
+    },
+    {
+      "label": "watch: types packages/tokens",
+      "type": "shell",
+      "command": "bunx tsc --noEmit --watch --preserveWatchOutput",
+      "options": {
+        "cwd": "${workspaceFolder}/packages/tokens"
+      },
+      "isBackground": true,
+      "problemMatcher": {
+        "base": "$tsc-watch",
+        "fileLocation": ["relative", "${workspaceFolder}/packages/tokens"]
+      },
+      "presentation": {
+        "reveal": "never",
+        "group": "watch"
+      }
+    },
+    {
+      "label": "watch: typecheck all",
+      "dependsOn": [
+        "watch: types apps/api",
+        "watch: types apps/web",
+        "watch: types apps/mobile",
+        "watch: types packages/shared",
+        "watch: types packages/api-client",
+        "watch: types packages/tokens"
+      ],
+      "runOptions": {
+        "runOn": "folderOpen"
+      },
       "problemMatcher": []
     }
   ]
